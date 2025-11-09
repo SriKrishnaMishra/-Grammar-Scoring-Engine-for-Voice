@@ -10,7 +10,7 @@ Installation
 
 Clone the repository
 
-bashgit clone https://github.com/yourusername/grammar-scoring-engine.git
+bashgit clone https://github.com/SriKrishnaMishra/-Grammar-Scoring-Engine-for-Voice
 cd grammar-scoring-engine
 
 Install dependencies
