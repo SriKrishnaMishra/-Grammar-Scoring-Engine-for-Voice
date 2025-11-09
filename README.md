@@ -1,107 +1,77 @@
-# -Grammar-Scoring-Engine-for-Voice
+Grammar Scoring Engine for Voice
+
+This project implements a Grammar Scoring Engine that takes spoken-voice samples as input and outputs a grammar-score on a scale (e.g., 0–5) reflecting the grammatical correctness of the spoken response. It is designed for applications such as language learning, automated speaking assessment, and interview-preparation feedback.
+
+Key Features
+
+Uses automatic speech recognition (ASR) to convert voice samples into text (leveraging e.g., the Whisper model).
+
+Applies a fine-tuned text-understanding model (e.g., BERT or variants) to assess grammatical correctness, combined with rule-based features.
+
+Supports both single-file scoring and batch processing of multiple audio files.
+
 Getting Started
+
 Prerequisites
 
 Python 3.8+
-Google Colab account (recommended)
-Kaggle account (for dataset access)
+
+Google Colab (recommended) or local GPU environment
+
+(Optional) Kaggle account to access the dataset
 
 Installation
 
-Clone the repository
+git clone https://github.com/SriKrishnaMishra/-Grammar-Scoring-Engine-for-Voice  
+cd Grammar-Scoring-Engine-for-Voice  
+pip install -r requirements.txt  
 
-bashgit clone https://github.com/SriKrishnaMishra/-Grammar-Scoring-Engine-for-Voice
-cd grammar-scoring-engine
 
-Install dependencies
+Usage Example
 
-bashpip install -r requirements.txt
+from grammar_scorer import GrammarScoringEngine  
+scorer = GrammarScoringEngine()  
+score = scorer.score_audio("path/to/audio.wav")  
+print(f"Grammar Score: {score}/5")  
+# Batch mode:  
+scores = scorer.score_batch(["file1.wav", "file2.wav", …])  
 
-Download required models
+Dataset
 
-python# Whisper model
-pip install openai-whisper
+The system is built and evaluated using the “SHL Grammar Scoring Dataset” which comprises ~444 voice samples (45–60 seconds each) annotated with grammar-scores (0–5). Samples include speakers with varied accents and real-world speaking contexts.
 
-# BERT model
-from transformers import AutoModel
-model = AutoModel.from_pretrained("distilbert-base-uncased")
-Running in Google Colab
+Results & Insights
 
-Upload the notebook to Google Colab
-Mount Google Drive for data access
-Install requirements in the first cell
-Run all cells sequentially
+ASR (Whisper) provides high-quality transcriptions even in accented/noisy speech.
 
-python# Mount Google Drive
-from google.colab import drive
-drive.mount('/content/drive')
+Fine-tuning BERT-style models on transcript data enables capturing grammatical patterns effectively.
 
-# Install dependencies
-!pip install openai-whisper transformers torch librosa
-📝 Usage Example
-pythonfrom grammar_scorer import GrammarScoringEngine
+A hybrid approach (ASR + NLP grammar model + rule-based features) yields stronger performance than pure individual approaches.
 
-# Initialize the engine
-scorer = GrammarScoringEngine()
+Although the dataset is relatively small, careful augmentation and evaluation show competitive error metrics.
 
-# Score a single audio file
-score = scorer.score_audio("path/to/audio.wav")
-print(f"Grammar Score: {score}/5")
+Future Improvements
 
-# Batch processing
-scores = scorer.score_batch(audio_files_list)
-📊 Dataset
-The project uses the SHL Grammar Scoring Dataset containing:
+Support for additional languages beyond English
 
-444+ voice samples (45-60 seconds each)
-Ground truth grammar scores (0-5 scale)
-Diverse speakers with various accents
-Real-world spoken English responses
+Real-time scoring API or web interface for easy use
 
-Dataset available on Kaggle (private datasource)
-🎯 Results & Insights
+Larger-scale training dataset and domain-adaptation
 
-Whisper ASR provides high-quality transcriptions even with accents and noise
-BERT fine-tuning effectively captures grammatical patterns from text
-Hybrid approach outperforms individual models
-Small dataset (444 samples) achieved competitive results with data augmentation
+Detailed error-feedback (highlighting which grammar structures were problematic)
 
-🔮 Future Improvements
+Integration into language-learning platforms or speaking-practice apps
 
- Add support for more languages
- Real-time scoring API
- Web interface for easy testing
- Larger training dataset
- Detailed feedback on specific grammar errors
- Integration with language learning platforms
+Contributing
 
-📚 Interview Preparation Tips
-Key talking points for interviews:
+Contributions are welcome! Feel free to open issues or pull-requests.
 
-Problem Understanding: Explain how you convert speech → text → grammar score
-Model Choice: Justify using Whisper (robust ASR) + BERT (contextual understanding)
-Hybrid Approach: Discuss why combining deep learning + rule-based features improves performance
-Challenges: Mention handling small dataset, accent variations, and ungrammatical speech preservation
-Metrics: Explain MAE, RMSE, and why correlation matters for ranking
-Deployment: Discuss Colab advantages (free GPU, reproducibility)
+License
 
-🤝 Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
-📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-👤 Author
-Your Name
+This project is licensed under the MIT License.
 
-GitHub: @yourusername
-LinkedIn: Your LinkedIn
-Kaggle: Your Kaggle
+Author
 
-🙏 Acknowledgments
+Sri Krishna Mishra (GitHub-https://github.com/SriKrishnaMishra/-Grammar-Scoring-Engine-for-Voice)
 
-OpenAI for Whisper model
-Hugging Face for Transformers library
-Kaggle for hosting the competition
-SHL for the dataset
-
-📞 Contact
-For questions or feedback, please open an issue or contact me at your.email@example.com
+Thank you for checking out this project — your feedback is much appreciated!
